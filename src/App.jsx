@@ -1,13 +1,14 @@
 
-import './App.css'
 
 function App() {
 
   return (
     <>
       <main>
-        <h1>Seja bem vindo! :)</h1>
-        <p>Terceiro Desafio: Formulário de Cadastro de Membros</p>
+        <div>
+          <h1>Fusion Cadastro</h1>
+          <p>Seja bem vindo! Faça seu cadastro abaixo:</p>
+        </div>
       </main>
     </>
   );
