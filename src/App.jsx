@@ -1,5 +1,8 @@
+import { useState } from "react";
 
 function App() {
+  const [openLinkedin, setOpenLinkedin] = useState(false)
+  const [openGithub, setOpenGithub] = useState(false)
 
   return (
     <>
@@ -102,21 +105,43 @@ function App() {
               </div>
 
               <div className='flex flex-col gap-2'>
-                <label className='text-white'>Linkedin</label>
-                <input
-                  type="text"
-                  placeholder="Digite a url do linkedin..."
-                  className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
-                />
+                <div className="flex items-center gap-3">
+                  <label className='text-white'>Linkedin</label>
+                  <input
+                    type="checkbox"
+                    checked={openLinkedin}
+                    onChange={(e) => setOpenLinkedin(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                </div>
+
+                {openLinkedin && (
+                  <input
+                    type="text"
+                    placeholder="Digite a url do linkedin..."
+                    className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
+                  />
+                )}
               </div>
 
               <div className='flex flex-col gap-2'>
-                <label className='text-white'>GitHub</label>
-                <input
-                  type="text"
-                  placeholder="Digite a url do github..."
-                  className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
-                />
+                <div className="flex items-center gap-3">
+                  <label className='text-white'>GitHub</label>
+                  <input
+                    type="checkbox"
+                    checked={openGithub}
+                    onChange={(e) => setOpenGithub(e.target.checked)}
+                    className="w-4 h-4"
+                  />
+                </div>
+
+                {openGithub && (
+                  <input
+                    type="text"
+                    placeholder="Digite a url do github..."
+                    className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
+                  />
+                )}
               </div>
 
               <button className="bg-black text-white p-3 font-bold hover:text-black hover:bg-white duration-500 transition-all">Enviar</button>
