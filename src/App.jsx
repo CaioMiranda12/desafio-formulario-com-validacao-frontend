@@ -14,7 +14,7 @@ function App() {
       .string()
       .email('Digite um e-mail válido')
       .required('O e-mail é obrigatório'),
-    fone: yup.number('O telefone deve ser um número').required('O seu telefone é obrigatório'),
+    fone: yup.string().required('O seu telefone é obrigatório'),
     position: yup.string().required(),
     linkedin: yup.string(),
     github: yup.string()
@@ -85,7 +85,7 @@ function App() {
               <div className='flex flex-col gap-2'>
                 <label className='text-white'>Telefone</label>
                 <input
-                  type="number"
+                  type="text"
                   placeholder="Digite seu telefone..."
                   className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
                   {...register("fone")}
