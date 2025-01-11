@@ -27,6 +27,8 @@ function App() {
   })
   const onSubmit = (data) => {
     console.log(data)
+
+    localStorage.setItem('fusion-cadastro', JSON.stringify(data))
   }
 
 
