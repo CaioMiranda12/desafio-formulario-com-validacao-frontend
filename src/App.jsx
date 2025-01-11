@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from "yup"
+import { toast } from "react-toastify";
 
 function App() {
   const [openLinkedin, setOpenLinkedin] = useState(false)
@@ -13,7 +14,7 @@ function App() {
       .string()
       .email('Digite um e-mail válido')
       .required('O e-mail é obrigatório'),
-    fone: yup.string().required('O seu telefone é obrigatório'),
+    fone: yup.number('O telefone deve ser um número').required('O seu telefone é obrigatório'),
     linkedin: yup.string(),
     github: yup.string()
   }).required()
@@ -22,13 +23,31 @@ function App() {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(schema),
   })
   const onSubmit = (data) => {
-    console.log(data)
 
-    localStorage.setItem('fusion-cadastro', JSON.stringify(data))
+    const usersList = localStorage.getItem('fusion-cadastro')
+    const allUsers = usersList ? JSON.parse(usersList) : []
+
+    const userEmailExists = allUsers.find(item => item.email === data.email)
+
+    if (!userEmailExists) {
+      const newUsers = [...allUsers, data]
+
+      localStorage.setItem('fusion-cadastro', JSON.stringify(newUsers))
+
+      toast.success('Usuário cadastrado com sucesso!')
+
+      reset()
+
+    } else {
+      toast.error('E-mail já cadastrado, tente novamente!')
+    }
+
+
   }
 
 
@@ -65,7 +84,7 @@ function App() {
               <div className='flex flex-col gap-2'>
                 <label className='text-white'>Telefone</label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="Digite seu telefone..."
                   className='bg-transparent placeholder:text-gray-300 text-white border py-1 px-2 border-gray-200'
                   {...register("fone")}
