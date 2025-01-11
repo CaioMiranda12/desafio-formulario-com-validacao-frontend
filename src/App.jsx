@@ -15,6 +15,7 @@ function App() {
       .email('Digite um e-mail válido')
       .required('O e-mail é obrigatório'),
     fone: yup.number('O telefone deve ser um número').required('O seu telefone é obrigatório'),
+    position: yup.string().required(),
     linkedin: yup.string(),
     github: yup.string()
   }).required()
@@ -95,7 +96,10 @@ function App() {
               <div className='flex flex-col gap-2'>
                 <label className='text-white'>Cargo</label>
 
-                <select className='h-8'>
+                <select
+                  className='h-8'
+                  {...register("position")}
+                >
                   <option value="Frontend">
                     Frontend
                   </option>
